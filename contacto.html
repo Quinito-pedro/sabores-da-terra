@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contacto - Sabores da Terra</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            background-color: #a084ce;
+        }
+        /* Estilo do rodapé */
+        footer {
+            background-color: #000; /* Cor preta */
+            color: white; /* Cor do texto em branco */
+            text-align: center;
+            padding: 20px;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+
+        footer p {
+            margin: 5px 0;
+        }
+
+        /* Estilo para a área de mensagem maior */
+        #contato-mensagem {
+            width: 100%;
+            height: 100px; /* Aumenta a altura da área de texto */
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        /* Estilo geral do formulário */
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        input, textarea {
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 100%;
+        }
+
+        button {
+            padding: 10px;
+            font-size: 16px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav>
+        <a href="index.html">Início</a>
+        <a href="menu.html">Menu</a>
+        <a href="reservas.html">Reservas</a>
+        <a href="contacto.html">Contacto</a>
+    </nav>
+
+    <!-- Seção de Contato -->
+    <section id="contacto">
+        <h1>Entre em Contacto</h1>
+        <form id="form-contacto" onsubmit="return validarContacto()">
+            <input type="text" id="contato-nome" placeholder="Nome Completo" required>
+            <input type="email" id="contato-email" placeholder="Email" required>
+            <li><input type="text" id="contato-assunto" placeholder="Assunto" required></li>
+            <li><textarea id="contato-mensagem" placeholder="Mensagem" required></textarea></li>
+            <button type="submit">Enviar Mensagem</button>
+        </form>
+
+        <!-- Informações de contacto -->
+        <div id="info-contacto">
+            <p>Endereço: Rua Principal, 123, <b>Namacurra distrito</b></p>
+            <p>Telefone: (+258) 844909293 / 867455868</p>
+        </div>
+    </section>
+    <img src="Q.jpg" alt="">
+
+    <!-- Rodapé -->
+    <footer>
+        <p>Restaurante Sabores da Terra &copy; 2024</p>
+        <p>Email: sabor_da_terra@gmail.com</p>
+        <p>Localização: Província da Zambézia, Quelimane</p>
+        <p>Endereço: Av. Quinitopedrol, Rua 123</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,71 @@
+<<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reservas - Sabores da Terra</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body
+        {
+            background-color: rgb(167, 212, 173);
+        }
+        /* Estilo do rodapé */
+        footer {
+            background-color: #000; /* Cor preta */
+            color: white; /* Cor do texto em branco */
+            text-align: center;
+            padding: 20px;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+
+        footer p {
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav>
+        <a href="index.html">Início</a>
+        <a href="menu.html">Menu</a>
+        <a href="reservas.html">Reservas</a>
+        <a href="contacto.html">Contacto</a>
+    </nav>
+
+    <!-- Seção de Reservas -->
+    <section id="reservas">
+        <h1>Faça sua Reserva</h1>
+        <ol>
+            <ul type="square">
+                <i>Preincha os campos abaixo para garantir a sua reserva no</i> <b>Sabores da Terra</b>
+                <form id="form-reserva" onsubmit="return validarReserva()">
+                    <li><input type="text" id="nome" placeholder="Nome Completo" required></li>
+                    <li><input type="email" id="email" placeholder="Email" required></li>
+                    <li><input type="tel" id="telefone" placeholder="Telefone" required></li>
+                    <li><input type="date" id="data" required></li>
+                    <li><input type="time" id="hora" required></li>
+                    <li><input type="number" id="pessoas" placeholder="Número de Pessoas" required></li>
+                    <button type="submit">Enviar Reserva</on>button
+            </ul>
+            </ol>
+        </form>
+        <div id="reserva-status"></div>
+    </section>
+    <img src="Ima-18-4.jpg" alt="">
+    <img src="IMG_500.JPG" alt="">
+
+    <!-- Rodapé -->
+    <footer>
+        <p>Restaurante Sabores da Terra &copy; 2024</p>
+        <p>Email: sabor_da_terra@gmail.com</p>
+        <p>Localização: Província da Zambézia, Quelimane</p>
+        <p>Endereço: Av. Quinitopedrol, Rua 123</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

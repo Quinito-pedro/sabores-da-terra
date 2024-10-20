@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sabores da Terra</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Estilo do rodapé */
+        footer {
+            background-color: #000; /* Cor preta */
+            color: white; /* Cor do texto em branco */
+            text-align: center;
+            padding: 20px;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+
+        footer p {
+            margin: 5px 0;
+        }
+
+        /* Estilo do logo */
+        #logo {
+            display: block;
+            margin: 0 auto; /* Centraliza a imagem */
+            max-width: 100%; /* Faz a imagem responsiva */
+            height: auto; /* Mantém a proporção */
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav>
+        <a href="index.html">Início</a>
+        <a href="menu.html">Menu</a>
+        <a href="reservas.html">Reservas</a>
+        <a href="contacto.html">Contacto</a>
+    </nav>
+
+    <!-- Logo do Restaurante -->
+    <img src="t.jpg" alt="">
+    <!-- Boas-vindas -->
+    <header>
+        <h1>Bem-vindo ao Sabores da Terra</h1>
+        <p>Culinária regional e saudável em um ambiente acolhedor.</p>
+        <button onclick="window.location.href='menu.html'">Ver Menu</button>
+    </header>
+
+    <!-- Promoções Semanais (dinâmicas com JS) -->
+    <section id="promocoes">
+        <h2>Promoções Semanais</h2>
+        <div id="promo-banner">Carregando promoções...</div>
+        <p><b>Domingo 6:30:</b> Sopa de porco, feijão, dobrada e vegetais.</p>
+        <p><b>Segunda-feira 7h:</b> Cajoro quente, sopa de carne.</p>
+        <p><b>12h:</b> Lanche forcado de cabeça de boi feita com molho de cerveja Manica.</p>
+    </section>
+    <img src="th.jpg" alt="">
+
+    <!-- Seção Sobre nós -->
+    <section id="sobre-nos">
+        <h2>Sobre Nós</h2>
+        <p>Somos especializados em culinária regional saudável.</p>
+        <p>Somos uma empresa de refeições de qualidade e saudável.</p>
+        <p>Fazemos encomendas para casamentos, seminários, aniversários, reuniões e muito mais.</p>
+        <p><b>FAZEMOS ENCOMENDAS PRA FESTAS DE BRANCO</b></p>
+        <img src="500.jpg" alt="">
+    </section>
+
+    <!-- Depoimentos de Clientes -->
+    <section id="depoimentos">
+        <h2>Depoimentos de Clientes</h2>
+        <p>"A melhor comida caseira da região!" - Cliente Satisfeito</p>
+        <p>"Amei a vossa comida! Gostava de fazer uma reserva para amanhã às 8 da tarde com quatro cadeiras e preciso que preparem o mesmo prato, obrigado."</p>
+        <p>"Adorei a sobremesa. Gostava de fazer uma reserva para amanhã às 9h da manhã para três lugares. Posso fazer o pagamento adiantado?"</p>
+        <p>Equipe de <b>Sabores da Terra</b> está de parabéns pelas refeições.</p>
+    </section>
+
+    <!-- Rodapé -->
+    <footer>
+        <p>Restaurante Sabores da Terra &copy; 2024</p>
+        <p>Email: sabor_da_terra@gmail.com</p>
+        <p>Localização: Província da Zambézia, Quelimane</p>
+        <p>Endereço: Av. Quinitopedrol, Rua 123</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
