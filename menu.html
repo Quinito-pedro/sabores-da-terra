@@ -1,161 +1,247 @@
 <!DOCTYPE html>
 <html lang="pt">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Menu - Sabores da Terra</title>
-    <link rel="stylesheet" href="styles.css">
-    <style>
-        body {
-            background-color: #9898b9;
-            color: #000;
-            transition: background-color 0.3s, color 0.3s;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Menu - Sabores da Terra</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-        /* Estilo do rodapé */
-        footer {
-            background-color: #000;
-            color: white;
-            text-align: center;
-            padding: 20px;
-            position: relative;
-            bottom: 0;
-            width: 100%;
-        }
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #9898b9;
+      color: #000;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      transition: background-color 0.3s, color 0.3s;
+    }
 
-        footer p {
-            margin: 5px 0;
-        }
+    nav {
+      background-color: #333;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      padding: 15px;
+      gap: 20px;
+    }
 
-        /* Estilo do mapa */
-        #mapa {
-            width: 100%;
-            height: 400px;
-            margin-top: 20px;
-        }
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: bold;
+    }
 
-        /* Engrenagem moderna */
-        .engrenagem {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background-color: #ffffff; /* Cor de fundo branca */
-            border-radius: 50%;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            width: 60px; /* Aumentado para melhor usabilidade */
-            height: 60px; /* Aumentado para melhor usabilidade */
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            cursor: pointer;
-            transition: transform 0.3s, background-color 0.3s;
-        }
+    nav a:hover {
+      text-decoration: underline;
+    }
 
-        .engrenagem i {
-            font-size: 28px; /* Aumentado para melhor visibilidade */
-            color: #333;
-        }
+    .engrenagem {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background-color: #fff;
+      border-radius: 50%;
+      width: 60px;
+      height: 60px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      cursor: pointer;
+      transition: transform 0.3s, background-color 0.3s;
+      z-index: 999;
+    }
 
-        .engrenagem:hover {
-            background-color: #f0f0f0; /* Cor ao passar o mouse */
-            transform: rotate(90deg); /* Gira a engrenagem ao passar o mouse */
-        }
+    .engrenagem i {
+      font-size: 28px;
+      color: #333;
+    }
 
-        /* Tema escuro */
-        body.dark-mode {
-            background-color: #333;
-            color: #fff;
-        }
+    .engrenagem:hover {
+      background-color: #f0f0f0;
+      transform: rotate(90deg);
+    }
 
-        /* Estilo do botão de tema */
-        .dark-mode .engrenagem {
-            background-color: #444;
-        }
-    </style>
+    body.dark-mode {
+      background-color: #333;
+      color: #fff;
+    }
 
-    <!-- Link do FontAwesome para ícones modernos -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    .dark-mode .engrenagem {
+      background-color: #444;
+    }
 
-    <!-- Leaflet CSS para o OpenStreetMap -->
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    main {
+      flex: 1;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    section {
+      max-width: 800px;
+      width: 100%;
+      margin: 30px 0;
+    }
+
+    section h1, section h2 {
+      margin-bottom: 15px;
+      color: #222;
+    }
+
+    ol {
+      list-style: decimal inside;
+    }
+
+    li {
+      margin: 15px 0 5px 0;
+      font-weight: bold;
+    }
+
+    p {
+      margin: 5px 0 10px;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+      margin-bottom: 20px;
+    }
+
+    #mapa {
+      width: 100%;
+      height: 400px;
+      margin-top: 20px;
+      border-radius: 10px;
+    }
+
+    footer {
+      background-color: #000;
+      color: white;
+      text-align: center;
+      padding: 20px;
+    }
+
+    footer p {
+      margin: 5px 0;
+    }
+
+    @media (max-width: 600px) {
+      nav {
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .engrenagem {
+        width: 50px;
+        height: 50px;
+      }
+
+      .engrenagem i {
+        font-size: 22px;
+      }
+    }
+  </style>
 </head>
 <body>
 
-    <!-- Engrenagem moderna para alternar entre temas -->
-    <div class="engrenagem" onclick="alternarTema()">
-        <i class="fas fa-adjust"></i> <!-- Mudado para um ícone de tema -->
-    </div>
+  <!-- Botão de tema -->
+  <div class="engrenagem" onclick="alternarTema()">
+    <i class="fas fa-adjust"></i>
+  </div>
 
-    <!-- Navbar -->
-    <nav>
-        <a href="index.html">Início</a>
-        <a href="menu.html">Menu</a>
-        <a href="reservas.html">Reservas</a>
-        <a href="contacto.html">Contacto</a>
-    </nav>
+  <!-- Navbar -->
+  <nav>
+    <a href="index.html">Início</a>
+    <a href="menu.html">Menu</a>
+    <a href="reservas.html">Reservas</a>
+    <a href="contacto.html">Contacto</a>
+  </nav>
 
-    <!-- Seção do Menu -->
+  <!-- Conteúdo principal -->
+  <main>
     <section id="menu">
-        <h1>Nosso Menu</h1>
-        <ol>
-            <li>Vegetariano</li>
-            <p>Preco em cada prato <b>280 MZN </b>com disconto de 10%</p>
-            <img src="jpg.png" alt="">
-            <li>Cachoro-Quente</li>
-            <p><b>50 MZN</b> cada cachoro</p>
-            <img src="Q.jpg" alt="">
-            <li>Prato do dia com disconto de 15% do pagamento</li>
-            <p>O famoso prato do dia esta <b>250 MZN</b> cada e com disconto de 15% nos Domingos </p>
-            <img src="OIP.jpg" alt="Preco 250">
-            <li>Preferiencias extrangeiras com sabores ineditos e tudo com temperos da natureza <b>Sabores da Terra</b></li>
-            <p>Esse prato varia consoante a preferencias de muitos, sendo que que a primeiroa versao esta pra <b>300 MZN</b> e a segunda versao esta pra <b>380 MZN</b> e a ultima versao esta pra <b>450 MZN</b></p>
-            <img src="OIF.jpg" alt="">
-            <h1>Encomendas</h1>
-            <h2>Hornamentacao e refeições</h2>
-            <P>E pra festas como <b>Casamentos, Aniversarios, Festas de BRANCO, Reunioes, Ceminarios de grnde Volume</b></P>
-            <p>Apresentamos o nosso <b>Menu</b>e o pessoal escolhe o que prefere e nois preparamos consoante o pedido dos proprietarios</p>
-            <img src="menu.jpg" alt="">
-            <h1>Sobre festas de Branco e Casamentos</h1>
-            <img src="500.jpg" alt="">
-            <p><b>Os precos sao negociaves directamente no restaorant</b>e</p>
-        </ol>
-        <!-- Conteúdo do menu aqui -->
+      <h1>Nosso Menu</h1>
+      <ol>
+        <li>Vegetariano</li>
+        <p>Preço: <b>280 MZN</b> com 10% de desconto</p>
+        <img src="jpg.png" alt="Vegetariano">
+
+        <li>Cachorro-Quente</li>
+        <p>Preço: <b>50 MZN</b> cada</p>
+        <img src="Q.jpg" alt="Cachorro-quente">
+
+        <li>Prato do dia</li>
+        <p><b>250 MZN</b> com 15% de desconto aos domingos</p>
+        <img src="OIP.jpg" alt="Prato do dia">
+
+        <li>Preferências Estrangeiras</li>
+        <p>Versões:
+          <ul style="text-align:left;">
+            <li>Primeira versão: <b>300 MZN</b></li>
+            <li>Segunda versão: <b>380 MZN</b></li>
+            <li>Última versão: <b>450 MZN</b></li>
+          </ul>
+        </p>
+        <img src="OIF.jpg" alt="Sabores da Terra">
+
+        <h1>Encomendas</h1>
+        <h2>Hornamentação e Refeições</h2>
+        <p>Para: <b>Casamentos, Aniversários, Festas de Branco, Reuniões, Seminários</b></p>
+        <p>Apresentamos nosso <b>menu</b> e os clientes escolhem os pratos preferidos.</p>
+        <img src="menu.jpg" alt="Menu especial">
+
+        <h1>Sobre Festas de Branco e Casamentos</h1>
+        <img src="500.jpg" alt="Festas de Casamento">
+        <p><b>Preços negociáveis diretamente no restaurante</b></p>
+      </ol>
     </section>
 
-    <!-- Mapa -->
+    <!-- Localização -->
     <section id="localizacao">
-        <h2>Localização</h2>
-        <div id="mapa"></div>
+      <h2>Localização</h2>
+      <div id="mapa"></div>
     </section>
+  </main>
 
-    <!-- Rodapé -->
-    <footer>
-        <p>Restaurante Sabores da Terra &copy; 2024</p>
-        <p>Email: sabor_da_terra@gmail.com</p>
-        <p>Localização: Província da Zambézia, Quelimane</p>
-        <p>Endereço: Av. Quinitopedrol, Rua 123</p>
-    </footer>
+  <!-- Rodapé -->
+  <footer>
+    <p>Restaurante Sabores da Terra &copy; 2024</p>
+    <p>Email: sabor_da_terra@gmail.com</p>
+    <p>Localização: Província da Zambézia, Quelimane</p>
+    <p>Endereço: Av. Quinitopedrol, Rua 123</p>
+  </footer>
 
-    <!-- Script para alternar tema escuro/claro -->
-    <script>
-        function alternarTema() {
-            document.body.classList.toggle('dark-mode');
-        }
-    </script>
+  <!-- JS: Tema escuro -->
+  <script>
+    function alternarTema() {
+      document.body.classList.toggle('dark-mode');
+    }
+  </script>
 
-    <!-- Leaflet.js para exibir o mapa OpenStreetMap -->
-    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
-    <script>
-        var map = L.map('mapa').setView([-17.878, 36.887], 15);
+  <!-- JS: Mapa Leaflet -->
+  <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+  <script>
+    var map = L.map('mapa').setView([-17.878, 36.887], 15);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; OpenStreetMap contributors'
+    }).addTo(map);
 
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-        }).addTo(map);
-
-        var marker = L.marker([-17.878, 36.887]).addTo(map)
-            .bindPopup('Restaurante Sabores da Terra<br>Província da Zambézia, Quelimane.')
-            .openPopup();
-    </script>
-
+    L.marker([-17.878, 36.887]).addTo(map)
+      .bindPopup('Restaurante Sabores da Terra<br>Quelimane - Zambézia')
+      .openPopup();
+  </script>
 </body>
 </html>
+
+
