@@ -3,198 +3,798 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Sabores da Terra</title>
-  <link rel="shortcut icon" href="Jhon02.png" type="image/x-icon">
+  <title>Sabores da Terra | Alta Gastronomia de Quelimane</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
   <style>
+    /* --- VARIÁVEIS DE DESIGN SYSTEM --- */
+    :root {
+      --primary-terracota: #c85a32;
+      --primary-dark: #2a1b15;
+      --secondary-olive: #5b7053;
+      --accent-gold: #dfa84a;
+      --bg-offwhite: #fcfbfa;
+      --bg-card: #ffffff;
+      --text-dark: #3a3533;
+      --text-muted: #6e6561;
+      --border-color: #f1eeeb;
+      --font-title: 'Playfair Display', serif;
+      --font-body: 'Inter', sans-serif;
+      --shadow-sm: 0 4px 6px -1px rgba(42, 27, 21, 0.05);
+      --shadow-md: 0 10px 15px -3px rgba(42, 27, 21, 0.08), 0 4px 6px -2px rgba(42, 27, 21, 0.04);
+      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* --- RESET & SUPORTE BASE --- */
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
 
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      background: linear-gradient(135deg, #fefefe, #d8f3dc);
-      color: #333;
+    html {
+      scroll-behavior: smooth;
     }
 
-    nav {
-      background-color: #2c3e50;
+    body {
+      font-family: var(--font-body);
+      background-color: var(--bg-offwhite);
+      color: var(--text-dark);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+      transition: var(--transition);
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    .section-title {
+      font-family: var(--font-title);
+      font-size: 2.25rem;
+      color: var(--primary-dark);
+      text-align: center;
+      margin-bottom: 12px;
+      position: relative;
+    }
+
+    .section-title::after {
+      content: '';
+      display: block;
+      width: 60px;
+      height: 3px;
+      background-color: var(--accent-gold);
+      margin: 12px auto 0;
+      border-radius: 2px;
+    }
+
+    .section-subtitle {
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 1.05rem;
+      max-width: 600px;
+      margin: 0 auto 48px;
+    }
+
+    /* --- COMPONENTE: BOTÕES --- */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 14px 28px;
+      font-weight: 500;
+      font-size: 0.95rem;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: var(--transition);
+      border: none;
+      gap: 8px;
+    }
+
+    .btn-primary {
+      background-color: var(--primary-terracota);
+      color: #ffffff;
+    }
+
+    .btn-primary:hover {
+      background-color: #b04722;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(200, 90, 50, 0.25);
+    }
+
+    .btn-secondary {
+      background-color: transparent;
+      border: 2px solid var(--primary-dark);
+      color: var(--primary-dark);
+    }
+
+    .btn-secondary:hover {
+      background-color: var(--primary-dark);
+      color: #ffffff;
+      transform: translateY(-2px);
+    }
+
+    /* --- NAVBAR --- */
+    .navbar {
+      background-color: rgba(252, 251, 250, 0.95);
+      backdrop-filter: blur(8px);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      border-bottom: 1px solid var(--border-color);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .nav-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 80px;
+    }
+
+    .nav-logo {
+      font-family: var(--font-title);
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--primary-dark);
+    }
+
+    .nav-logo span {
+      color: var(--primary-terracota);
+    }
+
+    .nav-menu {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+    }
+
+    .nav-link {
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: var(--text-dark);
+      position: relative;
+    }
+
+    .nav-link:hover, .nav-link.active {
+      color: var(--primary-terracota);
+    }
+
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: -6px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background-color: var(--primary-terracota);
+      transition: var(--transition);
+    }
+
+    .nav-link:hover::after, .nav-link.active::after {
+      width: 100%;
+    }
+
+    /* --- HERO SECTION --- */
+    .hero {
+      position: relative;
+      background: linear-gradient(rgba(42, 27, 21, 0.65), rgba(42, 27, 21, 0.5)), 
+                  url('https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?q=80&w=1974&auto=format&fit=crop') no-repeat center center/cover;
+      padding: 160px 0 140px;
+      color: #ffffff;
+      text-align: center;
+    }
+
+    .hero-content {
+      max-width: 750px;
+      margin: 0 auto;
+    }
+
+    .hero-tag {
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--accent-gold);
+      font-weight: 600;
+      margin-bottom: 16px;
+      display: block;
+    }
+
+    .hero-title {
+      font-family: var(--font-title);
+      font-size: 3.5rem;
+      line-height: 1.2;
+      margin-bottom: 20px;
+      font-weight: 700;
+    }
+
+    .hero-description {
+      font-size: 1.15rem;
+      margin-bottom: 36px;
+      color: rgba(255, 255, 255, 0.9);
+      font-weight: 300;
+    }
+
+    .hero-buttons {
       display: flex;
       justify-content: center;
-      gap: 20px;
-      padding: 15px;
+      gap: 16px;
+    }
+
+    /* --- SEÇÃO: PROMOÇÕES TIMELINE --- */
+    .promotions {
+      padding: 90px 0;
+      background-color: #fff;
+    }
+
+    .timeline {
+      max-width: 850px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .timeline-item {
+      display: grid;
+      grid-template-columns: 160px 1fr;
+      background-color: var(--bg-offwhite);
+      border-left: 4px solid var(--primary-terracota);
+      border-radius: 0 12px 12px 0;
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      transition: var(--transition);
+    }
+
+    .timeline-item:hover {
+      transform: translateX(4px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .timeline-time {
+      background-color: var(--primary-dark);
+      color: var(--accent-gold);
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      font-weight: 600;
+      text-align: center;
+    }
+
+    .timeline-time span {
+      display: block;
+      font-size: 0.85rem;
+      color: #ffffff;
+      font-weight: 400;
+      margin-top: 4px;
+    }
+
+    .timeline-detail {
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .timeline-detail h3 {
+      font-family: var(--font-title);
+      color: var(--primary-dark);
+      font-size: 1.3rem;
+      margin-bottom: 6px;
+    }
+
+    .timeline-detail p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+
+    /* --- SEÇÃO: VITRINE DE SABORES --- */
+    .showcase {
+      padding: 90px 0;
+    }
+
+    .grid-menu {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 30px;
+    }
+
+    .menu-card {
+      background-color: var(--bg-card);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      border: 1px solid var(--border-color);
+      transition: var(--transition);
+    }
+
+    .menu-card:hover {
+      transform: translateY(-8px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .card-img-wrapper {
+      position: relative;
+      height: 240px;
+      overflow: hidden;
+    }
+
+    .card-img-wrapper img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: var(--transition);
+    }
+
+    .menu-card:hover .card-img-wrapper img {
+      transform: scale(1.08);
+    }
+
+    .card-tag {
+      position: absolute;
+      top: 16px;
+      left: 16px;
+      background-color: var(--secondary-olive);
+      color: #ffffff;
+      padding: 6px 14px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      border-radius: 30px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .card-tag.highlight {
+      background-color: var(--primary-terracota);
+    }
+
+    .card-body {
+      padding: 24px;
+    }
+
+    .card-header-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 12px;
+    }
+
+    .card-title {
+      font-family: var(--font-title);
+      font-size: 1.35rem;
+      color: var(--primary-dark);
+    }
+
+    .card-price {
+      font-weight: 600;
+      color: var(--primary-terracota);
+      font-size: 1.2rem;
+    }
+
+    .card-desc {
+      color: var(--text-muted);
+      font-size: 0.92rem;
+      margin-bottom: 20px;
+    }
+
+    /* --- SEÇÃO: SOBRE NÓS & EVENTOS --- */
+    .about {
+      padding: 90px 0;
+      background-color: var(--primary-dark);
+      color: #ffffff;
+    }
+
+    .about .section-title {
+      color: #ffffff;
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+      margin-bottom: 60px;
+    }
+
+    .about-text p {
+      color: rgba(255, 255, 255, 0.8);
+      margin-bottom: 20px;
+      font-size: 1.05rem;
+    }
+
+    .about-img {
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: var(--shadow-md);
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 24px;
+      margin-top: 40px;
+    }
+
+    .service-item {
+      background-color: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 30px 24px;
+      border-radius: 12px;
+      text-align: center;
+      transition: var(--transition);
+    }
+
+    .service-item:hover {
+      background-color: rgba(255, 255, 255, 0.08);
+      border-color: var(--accent-gold);
+      transform: translateY(-4px);
+    }
+
+    .service-icon {
+      font-size: 2rem;
+      color: var(--accent-gold);
+      margin-bottom: 16px;
+    }
+
+    .service-item h4 {
+      font-family: var(--font-title);
+      font-size: 1.2rem;
+      margin-bottom: 10px;
+    }
+
+    .service-item p {
+      font-size: 0.9rem;
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    /* --- SEÇÃO: DEPOIMENTOS --- */
+    .testimonials {
+      padding: 90px 0;
+      background-color: var(--bg-offwhite);
+    }
+
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+    }
+
+    .testimonial-card {
+      background-color: #fff;
+      padding: 32px;
+      border-radius: 16px;
+      box-shadow: var(--shadow-sm);
+      border: 1px solid var(--border-color);
+      position: relative;
+    }
+
+    .testimonial-card::before {
+      content: '“';
+      position: absolute;
+      top: 10px;
+      right: 24px;
+      font-family: var(--font-title);
+      font-size: 4rem;
+      color: rgba(200, 90, 50, 0.1);
+      line-height: 1;
+    }
+
+    .stars {
+      color: var(--accent-gold);
+      margin-bottom: 14px;
+      font-size: 0.85rem;
+    }
+
+    .testimonial-text {
+      font-style: italic;
+      color: var(--text-dark);
+      margin-bottom: 20px;
+      font-size: 0.98rem;
+    }
+
+    .testimonial-author {
+      font-weight: 600;
+      font-size: 0.9rem;
+      color: var(--primary-dark);
+    }
+
+    /* --- SEÇÃO: PARCERIAS / LINKS --- */
+    .links-section {
+      padding: 60px 0;
+      background-color: #fff;
+      border-top: 1px solid var(--border-color);
+    }
+
+    .links-grid {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 40px;
       flex-wrap: wrap;
     }
 
-    nav a {
-      color: #ecf0f1;
-      text-decoration: none;
-      font-weight: bold;
-      transition: color 0.3s;
-    }
-
-    nav a:hover {
-      color: #1abc9c;
-    }
-
-    main {
-      flex: 1;
+    .partner-link {
       display: flex;
-      flex-direction: column;
       align-items: center;
-      padding: 30px 20px;
-      text-align: center;
+      gap: 10px;
+      color: var(--text-muted);
+      font-weight: 500;
+      font-size: 0.95rem;
     }
 
-    main img {
-      width: 100%;
-      max-width: 600px;
-      height: auto;
-      border-radius: 12px;
-      object-fit: cover;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-      margin-bottom: 20px;
+    .partner-link:hover {
+      color: var(--primary-terracota);
     }
 
-    header h1 {
-      font-size: 2rem;
-      color: #2c3e50;
-      margin-bottom: 10px;
+    .partner-link i {
+      color: var(--accent-gold);
     }
 
-    header p {
-      font-size: 1.1rem;
-      margin-bottom: 20px;
-    }
-
-    button {
-      padding: 12px 24px;
-      font-size: 16px;
-      background-color: #1abc9c;
-      color: white;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
-      transition: background-color 0.3s, transform 0.2s;
-    }
-
-    button:hover {
-      background-color: #16a085;
-      transform: scale(1.03);
-    }
-
-    .card {
-      background-color: #fff;
-      padding: 20px;
-      margin: 25px auto;
-      width: 100%;
-      max-width: 800px;
-      border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-      text-align: left;
-    }
-
-    .card h2 {
-      margin-bottom: 12px;
-      color: #34495e;
-    }
-
-    .card p {
-      margin-bottom: 10px;
-      line-height: 1.6;
-    }
-
+    /* --- FOOTER EXPANDIDO --- */
     footer {
-      background-color: #2c3e50;
-      color: #ecf0f1;
-      text-align: center;
-      padding: 20px;
-      font-size: 14px;
+      background-color: #1a100d;
+      color: rgba(255, 255, 255, 0.7);
+      padding: 80px 0 30px;
+      font-size: 0.9rem;
+      border-top: 3px solid var(--primary-terracota);
     }
 
-    @media (max-width: 600px) {
-      nav {
+    .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 40px;
+      margin-bottom: 50px;
+    }
+
+    .footer-col h4 {
+      color: #ffffff;
+      font-family: var(--font-title);
+      font-size: 1.2rem;
+      margin-bottom: 24px;
+      position: relative;
+    }
+
+    .footer-col h4::after {
+      content: '';
+      display: block;
+      width: 30px;
+      height: 2px;
+      background-color: var(--primary-terracota);
+      margin-top: 8px;
+    }
+
+    .footer-col p {
+      margin-bottom: 12px;
+    }
+
+    .footer-col ul {
+      list-style: none;
+    }
+
+    .footer-col ul li {
+      margin-bottom: 12px;
+    }
+
+    .footer-col ul li a:hover {
+      color: #ffffff;
+      padding-left: 4px;
+    }
+
+    .social-links {
+      display: flex;
+      gap: 12px;
+      margin-top: 20px;
+    }
+
+    .social-icon {
+      width: 36px;
+      height: 36px;
+      background-color: rgba(255, 255, 255, 0.05);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #ffffff;
+    }
+
+    .social-icon:hover {
+      background-color: var(--primary-terracota);
+      color: #ffffff;
+    }
+
+    .map-placeholder {
+      width: 100%;
+      height: 150px;
+      background: linear-gradient(45deg, #2a1b15, #3a251e);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .map-placeholder a {
+      color: var(--accent-gold);
+      font-weight: 500;
+    }
+
+    .footer-bottom {
+      text-align: center;
+      padding-top: 30px;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      font-size: 0.8rem;
+    }
+
+    /* --- RESPONSIVIDADE (MOBILE-FIRST) --- */
+    @media (max-width: 992px) {
+      .about-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+      .about-img {
+        order: -1;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .hero-title {
+        font-size: 2.5rem;
+      }
+      .nav-container {
         flex-direction: column;
-        gap: 10px;
+        height: auto;
+        padding: 16px 0;
+        gap: 16px;
       }
-
-      header h1 {
-        font-size: 1.5rem;
+      .nav-menu {
+        gap: 20px;
+        flex-wrap: wrap;
+        justify-content: center;
       }
-
-      button {
-        width: 100%;
+      .timeline-item {
+        grid-template-columns: 1fr;
+        border-left: none;
+        border-top: 4px solid var(--primary-terracota);
+        border-radius: 0 0 12px 12px;
       }
-
-      .card {
-        padding: 15px;
+      .timeline-time {
+        padding: 16px;
+      }
+      .hero-buttons {
+        flex-direction: column;
       }
     }
   </style>
 </head>
 <body>
 
-  <!-- Navbar -->
-  <nav>
-    <a href="index.html">Início</a>
-    <a href="menu.html">Menu</a>
-    <a href="reservas.html">Reservas</a>
-    <a href="contacto.html">Contacto</a>
+  <nav class="navbar">
+    <div class="container nav-container">
+      <a href="#" class="nav-logo">Sabores da<span>Terra</span></a>
+      <ul class="nav-menu">
+        <li><a href="#" class="nav-link active">Início</a></li>
+        <li><a href="#promocoes" class="nav-link">Promoções</a></li>
+        <li><a href="#vitrine" class="nav-link">Menu Vitrine</a></li>
+        <li><a href="#sobre-nos" class="nav-link">Sobre & Eventos</a></li>
+        <li><a href="#depoimentos" class="nav-link">Depoimentos</a></li>
+      </ul>
+    </div>
   </nav>
 
-  <!-- Conteúdo principal -->
-  <main>
-    <!-- Logo -->
-    <img src="t.jpg" alt="Logo do Restaurante">
+  <header class="hero">
+    <div class="container hero-content">
+      <span class="hero-tag">A Autêntica Cozinha Zambeziana</span>
+      <h1 class="hero-title">O Coração Gastronómico de Quelimane</h1>
+      <p class="hero-description">Uma viagem sensorial através de pratos tradicionais, ingredientes frescos da nossa terra e receitas ricas e saudáveis preparadas com paixão.</p>
+      <div class="hero-buttons">
+        <a href="#vitrine" class="btn btn-primary"><i class="fa-solid fa-utensils"></i> Explorar Menu</a>
+        <a href="#sobre-nos" class="btn btn-secondary" style="border-color: #fff; color: #fff;">Fazer Encomenda</a>
+      </div>
+    </div>
+  </header>
 
-    <!-- Boas-vindas -->
-    <header>
-      <h1>Bem-vindo ao Sabores da Terra</h1>
-      <p>Culinária regional e saudável em um ambiente acolhedor.</p>
-      <button onclick="window.location.href='menu.html'">Ver Menu</button>
-    </header>
+  <section class="promotions" id="promocoes">
+    <div class="container">
+      <h2 class="section-title">Sabores do Dia & Promoções</h2>
+      <p class="section-subtitle">Organize a sua semana gastronómica connosco. Pratos tradicionais saídos do lume nos horários mais autênticos.</p>
+      
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-time">
+            06:30
+            <span>Domingo</span>
+          </div>
+          <div class="timeline-detail">
+            <h3>Sopa de Porco Tradicional</h3>
+            <p>Acompanhada de feijão, dobrada apurada e vegetais frescos da época. Perfeita para começar o dia com energia regional.</p>
+          </div>
+        </div>
 
-    <!-- Promoções -->
-    <section class="card" id="promocoes">
-      <h2>Promoções Semanais</h2>
-      <div id="promo-banner">Carregando promoções...</div>
-      <p><b>Domingo 6:30:</b> Sopa de porco, feijão, dobrada e vegetais.</p>
-      <p><b>Segunda-feira 7h:</b> Cajoro quente, sopa de carne.</p>
-      <p><b>12h:</b> Lanche forcado de cabeça de boi feita com molho de cerveja Manica.</p>
-    </section>
+        <div class="timeline-item">
+          <div class="timeline-time">
+            07:00
+            <span>Segunda-Feira</span>
+          </div>
+          <div class="timeline-detail">
+            <h3>Cajoro Quente & Sopa de Carne</h3>
+            <p>O aconchego matinal tradicional de Quelimane. Caldo rico em substância, servido extremamente fresco.</p>
+          </div>
+        </div>
 
-    <img src="th.jpg" alt="Prato da casa">
+        <div class="timeline-item">
+          <div class="timeline-time">
+            12:00
+            <span>Especial Semanal</span>
+          </div>
+          <div class="timeline-detail">
+            <h3>Lanche Forçado de Cabeça de Boi</h3>
+            <p>A joia da casa: carne tenra cozinhada lentamente no icónico molho especial à base de cerveja Manica.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-    <!-- Sobre nós -->
-    <section class="card" id="sobre-nos">
-      <h2>Sobre Nós</h2>
-      <p>Somos especializados em culinária regional saudável.</p>
-      <p>Fazemos encomendas para casamentos, seminários, aniversários, reuniões e muito mais.</p>
-      <p><b>FAZEMOS ENCOMENDAS PRA FESTAS DE BRANCO</b></p>
-      <img src="500.jpg" alt="Equipe Sabores da Terra">
-    </section>
+  <section class="showcase" id="vitrine">
+    <div class="container">
+      <h2 class="section-title">Nossa Vitrine de Sabores</h2>
+      <p class="section-subtitle">Os pratos mais icónicos da Zambézia reinventados com um toque de modernidade e foco na culinária saudável.</p>
+      
+      <div class="grid-menu">
+        <div class="menu-card">
+          <div class="card-img-wrapper">
+            <span class="card-tag highlight">Mais Pedido</span>
+            <img src="https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?q=80&w=600&auto=format&fit=crop" alt="Frango à Zambeziana">
+          </div>
+          <div class="card-body">
+            <div class="card-header-row">
+              <h3 class="card-title">Frango à Zambeziana</h3>
+              <span class="card-price">750 MT</span>
+            </div>
+            <p class="card-desc">Grelhado na brasa perfeita, marinado no autêntico leite de coco, limão e piripiri local.</p>
+            <button class="btn btn-secondary" style="width: 100%; padding: 10px;">Pedir Agora</button>
+          </div>
+        </div>
 
-    <!-- Depoimentos -->
-    <section class="card" id="depoimentos">
-      <h2>Depoimentos de Clientes</h2>
-      <p>"A melhor comida caseira da região!" - Cliente Satisfeito</p>
-      <p>"Gostava de fazer uma reserva para amanhã às 8 da tarde com quatro cadeiras."</p>
-      <p>"Adorei a sobremesa. Posso fazer o pagamento adiantado?"</p>
-      <p><b>Sabores da Terra</b> está de parabéns pelas refeições.</p>
-    </section>
-  </main>
+        <div class="menu-card">
+          <div class="card-img-wrapper">
+            <span class="card-tag">Saudável</span>
+            <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?q=80&w=600&auto=format&fit=crop" alt="Mucapata Tradicional">
+          </div>
+          <div class="card-body">
+            <div class="card-header-row">
+              <h3 class="card-title">Mucapata com Peixe</h3>
+              <span class="card-price">620 MT</span>
+            </div>
+            <p class="card-desc">A união rica do arroz, feijão soroco e coco, servida com uma sumarenta posta de peixe local grelhado.</p>
+            <button class="btn btn-secondary" style="width: 100%; padding: 10px;">Pedir Agora</button>
+          </div>
+        </div>
 
-  <!-- Rodapé -->
-  <footer>
-    <p>Restaurante Sabores da Terra &copy; 2024</p>
-    <p>Email: sabor_da_terra@gmail.com</p>
-    <p>Província da Zambézia, Quelimane</p>
-    <p>Endereço: Av. Quinitopedrol, Rua 123</p>
-  </footer>
-
-</body>
-</html>
+        <div class="menu-card">
+          <div class="card-img-wrapper">
+            <span class="card-tag highlight">Especialidade</span>
+            <img src="https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=600&auto=format&fit=crop" alt="Caril de Caranguejo">
+          </div>
+          <div class="card-body">
+            
